@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-image: url("images/bg.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.box {
+    background-color: #D3D3D3;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.boxLeft {
+    display: inline-block;
+    width: 30%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.btn {
+    width: 120px;
+    height: 30px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 1px;
+    border: none;
+    cursor: pointer;
+}
+
+.boxRight {
+    display: inline-block;
+    width: 69%;
+    
+}
+
+.boxTop {
+    position: relative;
+}
+
+.boxTop h1 {
+    text-align: center;
+}
+
+.weatherIcon {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.weatherIcon h3 {
+    margin: 0;
+}
+
+#weatherIcon {
+    width: 100px;
+    height: 100px;
+}
+
+#temp {
+    font-size: 30px;
+}
+
+.info {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+h5.textWidth, p.textWidth {
+    font-size: 20px;
+    width: 180px;
+    display: inline-block;
+    margin: 0;
+    font-weight: bold;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Weather widget</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div class="box">
+            <div class="boxLeft">
+                <ul>
+                    <li><button type="button" class="btn" id="today" onclick="day_cal()">Today</button></li>
+                    <li><button type="button" class="btn" id="day1" onclick="day_cal(this, 0)">1 day ahead</button></li>
+                    <li><button type="button" class="btn" id="day2" onclick="day_cal(this, 1)">2 days ahead</button></li>
+                    <li><button type="button" class="btn" id="day3" onclick="day_cal(this, 2)">3 days ahead</button></li>
+                    <li><button type="button" class="btn" id="day4" onclick="day_cal(this, 3)">4 days ahead</button></li>
+                    <li><button type="button" class="btn" id="day5" onclick="day_cal(this, 4)">5 days ahead</button></li>
+                    <li><button type="button" class="btn" id="day6" onclick="day_cal(this, 5)">6 days ahead</button></li>
+                    <li><button type="button" class="btn" id="day7" onclick="day_cal(this, 6)">7 days ahead</button></li>
+                    <li><button type="button" class="btn" id="day8" onclick="day_cal(this, 7)">8 days ahead</button></li>
+                </ul>
+            </div>
+            <div class="boxRight">
+                <div class="boxTop">
+                    <div><h1 id=""cityName">Thessaloniki</h1></div>
+                    <div class="weatherIcon">
+                        <img id="weatherIcon">
+                        <h3 id="temp"></h3>
+                    </div>
+                </div>
+                <div class="boxBot">
+                    <div class="info">
+                        <ul>
+                            <li><h5 class="textWidth">Feels like </h5><p class="textWidth" id="feelsLike"></p></li>
+                            <li><h5 class="textWidth">Pressure </h5><p class="textWidth" id="pressure"></p></li>
+                            <li><h5 class="textWidth">Humidity </h5><p class="textWidth" id="humidity"></p></li>
+                            <li><h5 class="textWidth">Wind speed </h5><p class="textWidth" id="windSpeed"></p></li>
+                            <li><h5 class="textWidth">Wind direction </h5><p class="textWidth" id="windDirection"></p></li>
+                            <li><h5 class="textWidth">Clouds </h5><p class="textWidth" id="clouds"></p></li>
+                        </ul>
+                    </div>
+                    <canvas id="lineChart" style="width:100%"></canvas>
+                </div>
+            </div>
+        </div>
+   
+        <script>
+            const xValues = ["1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "7 days", "8 days",];//"1 day ahead", "2 days ahead", "3 days ahead", "4 days ahead", "5 days ahead", "6 days ahead", "7 days ahead", "8 days ahead"];
+            let maxTemp = [];
+            
+            async function max_temp() {
+                const response = await fetch("https://api.openweathermap.org/data/2.5/onecall?lat=40.58725980318928&lon=22.948223362612612&exclude=hourly,minutely&appid=11b0499bd13ab56063de7565a440eb97&units=metric");
+                const data = await response.json();
+
+                for (let i = 0; i < xValues.length; i++) {
+                    maxTemp.push(data.daily[i].temp.max);
+                }
+
+            new Chart("lineChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{ 
+                        label: "Max Temperatue forecast",
+                        data: maxTemp,
+                    borderColor: "red",
+                    fill: false,
+                    borderWidth: 1,
+                    pointRadius: 2
+                    }]
+                },
+                options: {
+                    legend: {display: true},
+                }
+                });
+            }
+                max_temp();
+            </script>
+
+    </body>
+</html>
